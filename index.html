@@ -251,6 +251,7 @@
         <div class="total">
             <p>Total Pemasukan: <span id="totalIncome" class="income">Rp 0</span></p>
             <p>Total Pengeluaran: <span id="totalExpense" class="expense">Rp 0</span></p>
+            <p>Total Selisih: <span id="totalDifference">Rp 0</span></p>
         </div>
     </div>
 
@@ -292,6 +293,7 @@ const companyTypeInput = document.getElementById('companyType');
 const transactionList = document.getElementById('transactionList').getElementsByTagName('tbody')[0];
 const totalIncomeElement = document.getElementById('totalIncome');
 const totalExpenseElement = document.getElementById('totalExpense');
+const totalDifferenceElement = document.getElementById('totalDifference'); // Element untuk Total Selisih
 const cekEsWawanButton = document.getElementById('cekEsWawan');
 const cekPpobButton = document.getElementById('cekPpob');
 const toggleMessage = document.getElementById('toggleMessage');
@@ -341,6 +343,10 @@ function renderTransactions() {
     // Update total pemasukan dan pengeluaran
     totalIncomeElement.textContent = `Rp ${formatCurrency(totalIncome)}`;
     totalExpenseElement.textContent = `Rp ${formatCurrency(totalExpense)}`;
+
+    // Hitung total selisih
+    const totalDifference = totalIncome - totalExpense;
+    totalDifferenceElement.textContent = `Rp ${formatCurrency(totalDifference)}`;
 }
 
 // Fungsi untuk format angka uang dengan titik
@@ -475,7 +481,6 @@ cekPpobButton.addEventListener('click', function() {
 
 // Muat transaksi saat halaman dimuat
 window.onload = loadTransactions;
-
     </script>
 </body>
 </html>
