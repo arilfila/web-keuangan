@@ -108,11 +108,13 @@
         // Ambil filter yang dipilih oleh pengguna
         const filterSaldo = document.getElementById('filterSaldo').value;
         const filterAkses = document.getElementById('filterAkses').value;
+        const searchID = document.getElementById('searchID').value.trim().toLowerCase(); // Ambil input ID dan normalisasi ke lowercase
 
         // Filter data sesuai dengan pilihan
         const filteredUsers = users.filter(user => {
           let saldoFilter = true;
           let aksesFilter = true;
+          let idFilter = true;
 
           // Filter saldo
           if (filterSaldo === 'nonZero' && user.saldo === 0) {
@@ -124,7 +126,12 @@
             aksesFilter = false;
           }
 
-          return saldoFilter && aksesFilter;
+          // Filter ID (pencarian berdasarkan ID)
+          if (searchID && !user.id.toLowerCase().includes(searchID)) {
+            idFilter = false;
+          }
+
+          return saldoFilter && aksesFilter && idFilter;
         });
 
         // Menampilkan data ke dalam tabel
